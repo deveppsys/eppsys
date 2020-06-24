@@ -39,7 +39,6 @@ relationship ManyToOne {
 	VertragPerson{person} to Person
 }
 
-
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct
 
