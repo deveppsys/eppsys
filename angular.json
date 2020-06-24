@@ -7,6 +7,16 @@
       "root": "",
       "sourceRoot": "src/main/webapp",
       "projectType": "application",
+      "architect": {
+        "build": {
+          "styles": [
+            "./node_modules/primeicons/primeicons.css",
+            "./node_modules/primeng/resources/themes/nova-light/theme.css",
+            "./node_modules/primeng/resources/primeng.min.css",
+            "./node_modules/primeflex/primeflex.css"
+          ]
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "skipTests": true,
@@ -25,8 +35,7 @@
           "skipTests": true
         }
       },
-      "prefix": "jhi",
-      "architect": {}
+      "prefix": "epp"
     }
   },
   "defaultProject": "eppsys",
