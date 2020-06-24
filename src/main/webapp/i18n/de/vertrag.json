@@ -1,0 +1,23 @@
+{
+  "eppsysApp": {
+    "vertrag": {
+      "home": {
+        "title": "Vertrags",
+        "createLabel": "Vertrag erstellen",
+        "createOrEditLabel": "Vertrag erstellen oder bearbeiten",
+        "notFound": "No Vertrags found"
+      },
+      "created": "Vertrag erstellt mit ID {{ param }}",
+      "updated": "Vertrag aktualisiert mit ID {{ param }}",
+      "deleted": "Vertrag gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Vertrag {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Vertrag"
+      },
+      "art": "Art",
+      "status": "Status"
+    }
+  }
+}
