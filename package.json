@@ -36,7 +36,7 @@
     "swagger-ui-dist": "3.25.1",
     "tslib": "1.11.1",
     "zone.js": "0.10.3",
-    "jquery": "^1.9.1",
+    "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "canvas": "^2.6.1",
     "bufferutil": "^4.0.1",
