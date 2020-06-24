@@ -6,7 +6,7 @@ import { SessionsService } from './sessions.service';
 import { Account } from 'app/core/user/account.model';
 
 @Component({
-  selector: 'jhi-sessions',
+  selector: 'epp-sessions',
   templateUrl: './sessions.component.html',
 })
 export class SessionsComponent implements OnInit {
