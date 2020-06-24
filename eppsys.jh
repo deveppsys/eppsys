@@ -1,0 +1,50 @@
+entity Person {
+	nachname String
+    vorname String
+    geburtsname String
+    geburtsort String
+}
+
+entity VertragPerson {
+	art  VertragPersonArtTyp
+}
+
+enum VertragPersonArtTyp {
+	INHABER, 
+    EHEGATTE, 
+    KIND, 
+    ERBE, 
+    ANBIETER
+}
+
+entity Vertrag {
+    art VertragArtTyp
+	status VertragStatusTyp
+}
+
+
+enum VertragStatusTyp {
+    AKTIV, BEENDET
+}
+
+enum VertragArtTyp {
+    RIESTER, RUERUP, BAV
+}
+
+relationship ManyToOne {
+	VertragPerson{vertrag} to Vertrag
+}
+
+relationship ManyToOne {
+	VertragPerson{person} to Person
+}
+
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+angularSuffix * with epp
