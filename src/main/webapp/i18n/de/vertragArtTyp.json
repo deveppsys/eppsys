@@ -1,0 +1,10 @@
+{
+  "eppsysApp": {
+    "VertragArtTyp": {
+      "null": "",
+      "RIESTER": "RIESTER",
+      "RUERUP": "RUERUP",
+      "BAV": "BAV"
+    }
+  }
+}

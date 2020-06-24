@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="vertragPerson">
+            <h2><span jhiTranslate="eppsysApp.vertragPerson.detail.title">Vertrag Person</span> {{ vertragPerson.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="eppsysApp.vertragPerson.art">Art</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'eppsysApp.VertragPersonArtTyp.' + vertragPerson.art }}">{{ vertragPerson.art }}</span>
+                </dd>
+                <dt><span jhiTranslate="eppsysApp.vertragPerson.vertrag">Vertrag</span></dt>
+                <dd>
+                    <div *ngIf="vertragPerson.vertragId">
+                        <a [routerLink]="['/vertrag-epp', vertragPerson.vertragId, 'view']">{{ vertragPerson.vertragId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="eppsysApp.vertragPerson.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="vertragPerson.personId">
+                        <a [routerLink]="['/person-epp', vertragPerson.personId, 'view']">{{ vertragPerson.personId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/vertrag-person-epp', vertragPerson.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

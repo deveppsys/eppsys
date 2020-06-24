@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="person">
+            <h2><span jhiTranslate="eppsysApp.person.detail.title">Person</span> {{ person.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="eppsysApp.person.nachname">Nachname</span></dt>
+                <dd>
+                    <span>{{ person.nachname }}</span>
+                </dd>
+                <dt><span jhiTranslate="eppsysApp.person.vorname">Vorname</span></dt>
+                <dd>
+                    <span>{{ person.vorname }}</span>
+                </dd>
+                <dt><span jhiTranslate="eppsysApp.person.geburtsname">Geburtsname</span></dt>
+                <dd>
+                    <span>{{ person.geburtsname }}</span>
+                </dd>
+                <dt><span jhiTranslate="eppsysApp.person.geburtsort">Geburtsort</span></dt>
+                <dd>
+                    <span>{{ person.geburtsort }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/person-epp', person.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
