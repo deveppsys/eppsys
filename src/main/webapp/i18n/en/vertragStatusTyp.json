@@ -1,9 +1,0 @@
-{
-  "eppsysApp": {
-    "VertragStatusTyp": {
-      "null": "",
-      "AKTIV": "AKTIV",
-      "BEENDET": "BEENDET"
-    }
-  }
-}
