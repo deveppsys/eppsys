@@ -1,0 +1,35 @@
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.main-navbar {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: darkgray;
+  margin: 0;
+  padding: 0;
+}
+
+.main-output {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: lightgray;
+  margin: 0;
+  padding: 0.5em;
+}
+
+.main-footer {
+  color: #fff;
+  grid-column: 1;
+  grid-row: 3;
+  margin: 0;
+  padding: 0;
+}
+
+
+

@@ -1,13 +1,13 @@
 <epp-page-ribbon></epp-page-ribbon>
 
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-
-<div class="container-fluid">
-    <div class="card jh-card">
+<div class="main">
+    <div class="main-header">
+        <router-outlet name="navbar"></router-outlet>
+    </div>
+    <div class="main-output">
         <router-outlet></router-outlet>
     </div>
-
-    <epp-footer></epp-footer>
+    <div class="main-footer bg-dark">
+        <epp-footer></epp-footer>
+    </div>
 </div>
