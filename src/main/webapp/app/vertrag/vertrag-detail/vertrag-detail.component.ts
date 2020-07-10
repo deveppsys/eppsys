@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'epp-vertrag-detail',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class VertragDetailComponent implements OnInit {
 
   dataWertentwicklung: any;
+
+  menuItems: MenuItem[] = [];
 
   constructor() {
     this.dataWertentwicklung = {
@@ -27,7 +30,92 @@ export class VertragDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
+    this.menuItems = [
+      {
+        label: 'Allgemein',
+        items: [
+          { label: 'New' },
+        ]
+      },
+      {
+        label: 'Personen',
+        items: [
+          {
+            label: 'Inhaber',
+            // routerLink: ['person', { outlets: { vertrag: ['person'] } }]
+            routerLink: 'person'
+          },
+          {label: 'Ehegatte'},
+          {label: 'Kinder'},
+          {label: 'Erben'}
+        ]
+      },
+      {
+        label: 'Geschäftsvorfälle',
+        items: [
+          {label: 'Übersicht'},
+          {label: 'Kap.Üb. eingehend'},
+          {label: 'Kap.Üb. ausgehend'},
+          {label: 'Vers.ausgl. eingehend'},
+          {label: 'Vers.ausgl. ausgehend'},
+          {label: 'Schädliche Verwendung'},
+          {label: 'Eigenheimentnahme'},
+        ]
+      },
+      {
+        label: 'Vermögen',
+        // icon: 'pi pi-fw pi-pencil',
+        items: [
+          {label: 'Übersicht'},
+          {label: 'Wertentwicklung'},
+          {label: 'Bewegungen'}
+        ]
+      },
+      {
+        label: 'Förderung',
+        items: [
+          { label: 'Übersicht' },
+          { label: 'Gefördert' },
+          { label: 'Ungefördert' }
+        ]
+      },
+      {
+        label: 'Steuer',
+        items: [
+          {
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
+              {label: 'Save', icon: 'pi pi-fw pi-save'},
+              {label: 'Update', icon: 'pi pi-fw pi-save'},
+            ]
+          },
+          {
+            label: 'Other',
+            icon: 'pi pi-fw pi-tags',
+            items: [
+              {label: 'Delete', icon: 'pi pi-fw pi-minus'}
+            ]
+          }
+        ]
+      },
+      {
+        label: 'Meldungen',
+        items: [
+          { label: 'zusy' },
+          { label: 'rebsy' },
+          { label: 'mav' }
+        ]
+      },
+      {
+        label: 'Bescheinigungen',
+        items: [
+          { label: '§ 7a AltZertG'},
+          { label: '§ 22a EStG'},
+          { label: '§ 92 EStG' }
+        ]
+      }
+    ];
   }
-
 }

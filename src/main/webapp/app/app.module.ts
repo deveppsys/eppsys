@@ -16,7 +16,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ButtonModule } from 'primeng/button';
-import {VertragModule} from "app/vertrag/vertrag.module";
+import { VertragModule } from "app/vertrag/vertrag.module";
 
 @NgModule({
   imports: [

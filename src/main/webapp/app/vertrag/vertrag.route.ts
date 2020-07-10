@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import {VertragDetailComponent} from "app/vertrag/vertrag-detail/vertrag-detail.component";
 import {VertragSucheComponent} from "app/vertrag/vertrag-suche/vertrag-suche.component";
+import {VertragPersonComponent} from "app/vertrag/vertrag-person/vertrag-person.component";
 
 export const VERTRAG_ROUTES: Routes = [
   {
@@ -18,6 +19,12 @@ export const VERTRAG_ROUTES: Routes = [
     data: {
       authorities: [],
       pageTitle: 'vertrag.detail',
-    }
+    },
+    children: [
+      {
+        path: 'person',
+        component: VertragPersonComponent,
+      }
+    ]
   },
 ];

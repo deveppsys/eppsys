@@ -1,54 +1,8 @@
 <div class="p-grid">
-    <div class="p-col-12">
-        <p-card header="Allgemein">
-
-        </p-card>
+    <div class="p-col-2">
+        <p-panelMenu [model]="menuItems" [multiple]="false"></p-panelMenu>
     </div>
-    <div class="p-col-12 p-md-6">
-        <p-card header="Übersicht Kapital">
-            <div class="p-grid">
-                <div class="p-col-6">
-                    <div class="p-grid">
-                        <div class="p-col-12 text-left bold">Einzahlungen</div>
-                        <div class="p-col-6 text-left">Sparraten</div>
-                        <div class="p-col-6 text-right">12.000,00</div>
-                        <div class="p-col-6 text-left">Zulagen</div>
-                        <div class="p-col-6 text-right">3256,00</div>
-                        <div class="p-col-6 text-left">Ertrag</div>
-                        <div class="p-col-6 text-right">-345,76</div>
-                        <div class="p-col-6 text-left"><hr></div>
-                        <div class="p-col-6 text-right"><hr></div>
-                        <div class="p-col-6 text-left">Vertragswert</div>
-                        <div class="p-col-6 text-right">16.534,00</div>
-                    </div>
-                </div>
-                <div class="p-col-6">
-                    <div class="p-grid">
-                        <div class="p-col-12 text-left">Auszahlungen</div>
-                    </div>
-                </div>
-            </div>
-        </p-card>
-    </div>
-    <div class="p-col-12 p-md-6">
-        <p-card header="Übersicht Förderung">
-
-        </p-card>
-    </div>
-
-    <div class="p-col-12 p-md-4 p-lg-4">
-        <p-card header="Übersicht Wertentwicklung">
-            <p-chart type="line" [data]="dataWertentwicklung"></p-chart>
-        </p-card>
-    </div>
-    <div class="p-col-12 p-md-4 p-lg-4">
-        <p-card header="Übersicht Förderung">
-
-        </p-card>
-    </div>
-    <div class="p-col-12 p-md-4 p-lg-4">
-        <p-card header="Übersicht Förderung">
-
-        </p-card>
+    <div class="p-col-10">
+        <router-outlet></router-outlet>
     </div>
 </div>
