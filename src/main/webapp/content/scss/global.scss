@@ -197,4 +197,12 @@ ui bootstrap tweaks
   white-space: nowrap;
 }
 
+.full-height {
+  min-height: 100% !important;
+
+  p-card .ui-card {
+    min-height: 100% !important;
+  }
+}
+
 /* jhipster-needle-scss-add-main JHipster will add new css style */

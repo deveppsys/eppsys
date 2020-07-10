@@ -23,7 +23,7 @@ export class HomeAuthenticatedComponent implements OnInit {
   }
 
   clickTestVertragDetail(): any {
-    this.router.navigate(['vertrag/detail']);
+    this.router.navigate(['vertrag/basis']);
   }
 
   clickTestVertragSuche(): any {

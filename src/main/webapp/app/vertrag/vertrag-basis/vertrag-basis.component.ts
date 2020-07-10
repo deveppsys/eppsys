@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 
 @Component({
-  selector: 'epp-vertrag-detail',
-  templateUrl: './vertrag-detail.component.html',
-  styleUrls: ['./vertrag-detail.component.scss']
+  selector: 'epp-vertrag-basis',
+  templateUrl: './vertrag-basis.component.html',
+  styleUrls: ['./vertrag-basis.component.scss']
 })
-export class VertragDetailComponent implements OnInit {
+export class VertragBasisComponent implements OnInit {
 
   dataWertentwicklung: any;
 
@@ -43,12 +43,20 @@ export class VertragDetailComponent implements OnInit {
         items: [
           {
             label: 'Inhaber',
-            // routerLink: ['person', { outlets: { vertrag: ['person'] } }]
-            routerLink: 'person'
+            routerLink: 'person-inhaber'
           },
-          {label: 'Ehegatte'},
-          {label: 'Kinder'},
-          {label: 'Erben'}
+          {
+            label: 'Ehegatten',
+            routerLink: 'person-ehegatten'
+          },
+          {
+            label: 'Kinder',
+            routerLink: 'person-kinder'
+          },
+          {
+            label: 'Erben',
+            routerLink: 'person-erben'
+          }
         ]
       },
       {
@@ -84,20 +92,10 @@ export class VertragDetailComponent implements OnInit {
         label: 'Steuer',
         items: [
           {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              {label: 'Save', icon: 'pi pi-fw pi-save'},
-              {label: 'Update', icon: 'pi pi-fw pi-save'},
-            ]
+            label: 'Steuertöpfe',
+            routerLink: 'steuer-toepfe'
+
           },
-          {
-            label: 'Other',
-            icon: 'pi pi-fw pi-tags',
-            items: [
-              {label: 'Delete', icon: 'pi pi-fw pi-minus'}
-            ]
-          }
         ]
       },
       {
