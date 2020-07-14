@@ -14,6 +14,11 @@ h4 {
   font-weight: 300;
 }
 
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+
 .container-fluid {
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -203,6 +208,18 @@ ui bootstrap tweaks
   p-card .ui-card {
     min-height: 100% !important;
   }
+}
+
+.ui-fieldset .ui-fieldset-legend {
+  width: auto;
+  padding: 0.5em 0.5em;
+}
+
+.ui-fieldset .ui-fieldset-legend-text {
+  font-weight: bold;
+  font-size: 1.0rem;
+  padding: 0.5em 0.5em;
+  width: auto;
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

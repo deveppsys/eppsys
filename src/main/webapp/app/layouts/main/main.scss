@@ -1,3 +1,4 @@
+/*
 .main {
   display: grid;
   grid-template-columns: 100%;
@@ -21,6 +22,7 @@
   background-color: lightgray;
   margin: 0;
   padding: 0.5em;
+  overflow: hidden;
 }
 
 .main-footer {
@@ -29,6 +31,29 @@
   grid-row: 3;
   margin: 0;
   padding: 0;
+  align-self: end;
+}
+ */
+
+.main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.main-header {
+
+}
+
+.main-output {
+  flex: 1;
+  overflow: auto;
+  margin: 0.5em;
+}
+
+.main-footer {
+  color: #fff;
 }
 
 

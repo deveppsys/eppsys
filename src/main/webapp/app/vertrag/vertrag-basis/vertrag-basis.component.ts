@@ -8,26 +8,9 @@ import {MenuItem} from 'primeng/api';
 })
 export class VertragBasisComponent implements OnInit {
 
-  dataWertentwicklung: any;
-
   menuItems: MenuItem[] = [];
 
   constructor() {
-    this.dataWertentwicklung = {
-      labels: ['2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010'],
-      datasets: [
-        {
-          label: 'Einzahlungen',
-          data: [1200.00, 2400.00, 3600.00, 4800.00, 6000.00, 7200.00, 8400.00, 9600.00, 10800.00],
-          borderColor: '#4bc0c0'
-        },
-        {
-          label: 'Kurswert',
-          data: [700.00, 1950.00, 3600.00, 5000.00, 6400.00, 7800.00, 10000.00, 12000.00,14000.00, 15700.00],
-          borderColor: '#565656'
-        }
-      ]
-    }
   }
 
   ngOnInit(): any {
@@ -63,6 +46,10 @@ export class VertragBasisComponent implements OnInit {
         label: 'Geschäftsvorfälle',
         items: [
           {label: 'Übersicht'},
+          {
+            label: 'Zulageantrag',
+            routerLink: 'gf-zulageantrag'
+          },
           {label: 'Kap.Üb. eingehend'},
           {label: 'Kap.Üb. ausgehend'},
           {label: 'Vers.ausgl. eingehend'},
@@ -75,9 +62,18 @@ export class VertragBasisComponent implements OnInit {
         label: 'Vermögen',
         // icon: 'pi pi-fw pi-pencil',
         items: [
-          {label: 'Übersicht'},
-          {label: 'Wertentwicklung'},
-          {label: 'Bewegungen'}
+          {
+            label: 'Übersicht',
+            routerLink: 'vermoegen-uebersicht'
+          },
+          {
+            label: 'Wertentwicklung',
+            routerLink: 'vermoegen-wertentwicklung'
+          },
+          {
+            label: 'Bewegungen',
+            routerLink: 'vermoegen-bewegungen'
+          }
         ]
       },
       {

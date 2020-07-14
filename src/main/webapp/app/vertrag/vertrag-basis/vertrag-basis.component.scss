@@ -1,1 +1,43 @@
+/*
+.vertrag-main {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: auto 1fr;
+  height: 100%;
+  margin: 0;
+}
 
+.vertrag-navbar {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.vertrag-output {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  padding-left: 0.5em;
+  height: 100%;
+}
+
+ */
+
+.vertrag-main {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.vertrag-navbar {
+  overflow: auto;
+}
+
+.vertrag-output {
+  flex: 1;
+  overflow: auto;
+  margin-left: 0.5em;
+}

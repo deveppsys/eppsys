@@ -4,6 +4,11 @@ import {VertragBasisComponent} from "app/vertrag/vertrag-basis/vertrag-basis.com
 import {VertragSucheComponent} from "app/vertrag/vertrag-suche/vertrag-suche.component";
 import {VertragPersonComponent} from "app/vertrag/vertrag-person/vertrag-person.component";
 import {VertragSteuerToepfeComponent} from "app/vertrag/vertrag-steuer/vertrag-steuer-toepfe/vertrag-steuer-toepfe.component";
+import {VertragZaBasisComponent} from "app/vertrag/vertrag-zulageantrag/vertrag-za-basis/vertrag-za-basis.component";
+import {VertragVermBewegungenComponent} from "app/vertrag/vertrag-vermoegen/vertrag-verm-bewegungen/vertrag-verm-bewegungen.component";
+import {VertragVermUebersichtComponent} from "app/vertrag/vertrag-vermoegen/vertrag-verm-uebersicht/vertrag-verm-uebersicht.component";
+import {VertragVermWertentwComponent} from "app/vertrag/vertrag-vermoegen/vertrag-verm-wertentw/vertrag-verm-wertentw.component";
+import {VertragMeldungUebersichtComponent} from "app/vertrag/vertrag-meldung/vertrag-meldung-uebersicht/vertrag-meldung-uebersicht.component";
 
 export const VERTRAG_ROUTES: Routes = [
   {
@@ -37,6 +42,26 @@ export const VERTRAG_ROUTES: Routes = [
       {
         path: 'person-erben',
         component: VertragPersonComponent,
+      },
+      {
+        path: 'gf-zulageantrag',
+        component: VertragZaBasisComponent,
+      },
+      {
+        path: 'vermoegen-uebersicht',
+        component: VertragVermUebersichtComponent,
+      },
+      {
+        path: 'vermoegen-wertentwicklung',
+        component: VertragVermWertentwComponent,
+      },
+      {
+        path: 'vermoegen-bewegungen',
+        component: VertragVermBewegungenComponent,
+      },
+      {
+        path: 'meldung-uebersicht',
+        component: VertragMeldungUebersichtComponent,
       },
       {
         path: 'steuer-toepfe',
