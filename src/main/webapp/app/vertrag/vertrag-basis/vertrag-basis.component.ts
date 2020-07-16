@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
+import {VertragService} from "app/vertrag/vertrag.service";
 
 @Component({
   selector: 'epp-vertrag-basis',
@@ -10,7 +11,8 @@ export class VertragBasisComponent implements OnInit {
 
   menuItems: MenuItem[] = [];
 
-  constructor() {
+  constructor(private vertragService: VertragService) {
+    vertragService.generateVertrag();
   }
 
   ngOnInit(): any {
@@ -18,7 +20,10 @@ export class VertragBasisComponent implements OnInit {
       {
         label: 'Allgemein',
         items: [
-          { label: 'New' },
+          {
+            label: 'Berechnung',
+            routerLink: 'allgemein-berechnung'
+          },
         ]
       },
       {
@@ -97,7 +102,10 @@ export class VertragBasisComponent implements OnInit {
       {
         label: 'Meldungen',
         items: [
-          { label: 'zusy' },
+          {
+            label: 'zusy',
+            routerLink: 'meldung-zusy'
+          },
           { label: 'rebsy' },
           { label: 'mav' }
         ]

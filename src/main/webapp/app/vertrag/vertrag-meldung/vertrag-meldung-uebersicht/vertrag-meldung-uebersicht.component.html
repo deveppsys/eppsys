@@ -1,1 +1,34 @@
-<p>vertrag-meldung-uebersicht works!</p>
+<p-card header="Meldungen - zusy">
+    <p-dataView [value]="meldungen"
+                [paginator]="true"
+                [rows]="15"
+                [sortField]="sortField"
+                [sortOrder]="sortOrder">
+        paginatorPosition="bottom">
+        <p-header>
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <p-dropdown [options]="sortOptions" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'250px'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="p-grid">
+                <div class="p-col-1 text-left">Art</div>
+                <div class="p-col-1 text-center">Angelegt</div>
+                <div class="p-col-2 text-left">Status</div>
+                <div class="p-col-1 text-center">Verarbeitet</div>
+                <div class="p-col-7"></div>
+            </div>
+        </p-header>
+        <ng-template let-meldung pTemplate="listItem">
+            <div class="p-col-1 text-left">{{meldung.art}}</div>
+            <div class="p-col-1 text-center">{{meldung.datumangelegt | date:'dd.MM.yyyy'}}</div>
+            <div class="p-col-2 text-left">{{meldung.stat}}</div>
+            <div class="p-col-1 text-center">{{meldung.datumverarbeitet | date:'dd.MM.yyyy'}}</div>
+            <div class="p-col-7 text-left">
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: .7em"></button>
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: .7em"></button>
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: .7em"></button>
+            </div>
+        </ng-template>
+    </p-dataView>
+</p-card>

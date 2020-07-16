@@ -1,4 +1,4 @@
-<p-card class="full-height" header="Vermögen - Bewegungen">
+<p-card header="Vermögen - Bewegungen">
     <p-dataView [value]="bewegungen"
                 [paginator]="true"
                 [rows]="15"
@@ -14,20 +14,21 @@
             <div class="p-grid">
                 <div class="p-col-1 text-center">Erstellung</div>
                 <div class="p-col-2 text-left">Art</div>
+                <div class="p-col-1 text-center">Jahr</div>
                 <div class="p-col-1">Status</div>
                 <div class="p-col-1 text-center">Buchung</div>
                 <div class="p-col-1 text-right">Betrag</div>
-                <div class="p-col-6"></div>
+                <div class="p-col-5"></div>
             </div>
         </p-header>
         <ng-template let-bewegung pTemplate="listItem">
-
                 <div class="p-col-1 text-center">{{bewegung.datumerstellung | date:'dd.MM.yyyy'}}</div>
                 <div class="p-col-2 text-left">{{bewegung.art}}</div>
+                <div class="p-col-1 text-center">{{bewegung.jahrZuordnung}}</div>
                 <div class="p-col-1">{{bewegung.stat}}</div>
                 <div class="p-col-1 text-center">{{bewegung.datumbuchung | date:'dd.MM.yyyy'}}</div>
                 <div class="p-col-1 text-right">{{bewegung.betrag | currency:'EUR' }}</div>
-                <div class="p-col-6 text-left">
+                <div class="p-col-5 text-left">
                     <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: .7em"></button>
                     <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: .7em"></button>
                     <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: .7em"></button>

@@ -1,10 +1,108 @@
-export class BewegungDTO {
+export class BewegungVM {
   constructor(
     public datumerstellung?: Date,
     public datumbuchung?: Date,
-    public art?: string,
-    public stat?: string,
+    public art?: BewegungArtTyp,
+    public stat?: BewegungStatusTyp,
+    public jahrZuordnung?: number,
     public betrag?: number
+  ) {
+
+  }
+}
+
+export enum BewegungArtTyp {
+  EINZAHLUNG_BEITRAG = 'Einzahlung Beitrag',
+  EINZAHLUNG_ZULAGE= 'Einzahlung Zulage',
+  EINZAHLUNG_KAPITALUEBERTRAG= 'Einzahlung Kapitalübertrag',
+  EINZAHLUNG_VERSORGUNGSAUSGLEICH= 'Einzahlung Versorgungsausgleich',
+
+  AUSZAHLUNG_BEITRAG = 'Auszahlung Beitrag',
+  AUSZAHLUNG_ZULAGE = 'Auszahlung Zulage',
+  AUSZAHLUNG_KAPITALUEBERTRAG = 'Auszahlung Kapitalübertrag',
+  AUSZAHLUNG_VERSORGUNGSAUSGLEICH = 'Auszahlung Versorgungsausgleich',
+}
+
+export enum BewegungStatusTyp {
+  ANGELEGT = 'angelegt',
+  ABGERECHNET = 'abgerechnet'
+
+}
+
+export class MeldungVM {
+  constructor(
+    public datumangelegt?: Date,
+    public datumverarbeitet?: Date,
+    public art?: MeldungArtTyp,
+    public stat?: MeldungStatusTyp,
+    public meldung?: string
+  ) {
+
+  }
+}
+
+export enum MeldungStatusTyp {
+  EINGANG_ANGELEGT = 'eingehend angelegt',
+  EINGANG_IMPORTIERT = 'eingehend importiert',
+
+  AUSGANG_ANGELEGT = 'ausgehend angelegt',
+  AUSGANG_EXPORTIERT = 'ausgehend exportiert'
+}
+
+export enum MeldungArtZusyTyp {
+  AZ01 = 'AZ01',
+  AZ02 = 'AZ02',
+  AZ03 = 'AZ03',
+
+  ZA01 = 'ZA01',
+  ZA02 = 'ZA02',
+  ZA03 = 'ZA03',
+  ZA04 = 'ZA04'
+}
+
+export enum MeldungArtTyp  {
+  AZ01 = MeldungArtZusyTyp.AZ01,
+  AZ02 = MeldungArtZusyTyp.AZ02,
+  AZ03 = MeldungArtZusyTyp.AZ03,
+
+  ZA01 = MeldungArtZusyTyp.ZA01,
+  ZA02 = MeldungArtZusyTyp.ZA02,
+  ZA03 = MeldungArtZusyTyp.ZA03,
+  ZA04 = MeldungArtZusyTyp.ZA04
+}
+
+export class BerechnungJahrVM {
+  constructor(
+    public jahr?: number,
+    public imJahrBeitrag?: number,
+    public imJahrBeitragNgz?: number,
+    public imJahrZulage?: number,
+    public fuJahrBeitrag?: number,
+    public fuJahrBeitragNgz?: number,
+    public fuJahrZulage?: number,
+    public fuJahrBeizul?: number,
+  ) {
+
+  }
+}
+
+export class BerechnungVM {
+  constructor(
+    public berechnungJahre?: BerechnungJahrVM[],
+  ) {
+
+  }
+}
+
+export class VertragVM {
+  constructor(
+    public nr?: string,
+    public beginnvertrag?: Date,
+    public beginneinzahlphase?: Date,
+    public beginnauszahlphase?: Date,
+    public beginnrentenphase?: Date,
+    public bewegungen?: BewegungVM[],
+    public meldungen?: MeldungVM[]
   ) {
 
   }

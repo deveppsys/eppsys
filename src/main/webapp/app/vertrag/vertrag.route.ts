@@ -9,6 +9,8 @@ import {VertragVermBewegungenComponent} from "app/vertrag/vertrag-vermoegen/vert
 import {VertragVermUebersichtComponent} from "app/vertrag/vertrag-vermoegen/vertrag-verm-uebersicht/vertrag-verm-uebersicht.component";
 import {VertragVermWertentwComponent} from "app/vertrag/vertrag-vermoegen/vertrag-verm-wertentw/vertrag-verm-wertentw.component";
 import {VertragMeldungUebersichtComponent} from "app/vertrag/vertrag-meldung/vertrag-meldung-uebersicht/vertrag-meldung-uebersicht.component";
+import {VertragFoerderungUebersichtComponent} from "app/vertrag/vertrag-foerderung/vertrag-foerderung-uebersicht/vertrag-foerderung-uebersicht.component";
+import {VertragAllgemeinBerechnungComponent} from "app/vertrag/vertrag-allgemein/vertrag-allgemein-berechnung/vertrag-allgemein-berechnung.component";
 
 export const VERTRAG_ROUTES: Routes = [
   {
@@ -27,6 +29,10 @@ export const VERTRAG_ROUTES: Routes = [
       pageTitle: 'vertrag.detail',
     },
     children: [
+      {
+        path: 'allgemein-berechnung',
+        component: VertragAllgemeinBerechnungComponent,
+      },
       {
         path: 'person-inhaber',
         component: VertragPersonComponent,
@@ -60,7 +66,11 @@ export const VERTRAG_ROUTES: Routes = [
         component: VertragVermBewegungenComponent,
       },
       {
-        path: 'meldung-uebersicht',
+        path: 'foerderung-uebersicht',
+        component: VertragFoerderungUebersichtComponent,
+      },
+      {
+        path: 'meldung-zusy',
         component: VertragMeldungUebersichtComponent,
       },
       {
