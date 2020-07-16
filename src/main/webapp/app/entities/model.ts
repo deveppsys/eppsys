@@ -35,6 +35,7 @@ export class MeldungVM {
     public datumverarbeitet?: Date,
     public art?: MeldungArtTyp,
     public stat?: MeldungStatusTyp,
+    public jahrZuordnung?: number,
     public meldung?: string
   ) {
 
@@ -42,11 +43,14 @@ export class MeldungVM {
 }
 
 export enum MeldungStatusTyp {
-  EINGANG_ANGELEGT = 'eingehend angelegt',
-  EINGANG_IMPORTIERT = 'eingehend importiert',
+  EINGANG_ANGELEGT = 'Import angelegt',
+  EINGANG_IMPORTIERT_OHNE_FEHLER = 'Import ohne Fehler',
+  EINGANG_IMPORTIERT_MIT_FEHLER = 'Import mit Fehlern',
+  EINGANG_NICHT_IMPORTIERBAR = 'Import fehlerhaft',
 
-  AUSGANG_ANGELEGT = 'ausgehend angelegt',
-  AUSGANG_EXPORTIERT = 'ausgehend exportiert'
+  AUSGANG_ANGELEGT = 'Export angelegt',
+  AUSGANG_EXPORTIERT_OHNE_FEHLER = 'Export ohne Fehler',
+  AUSGANG_EXPORTIERT_NICHT_EXPORTIERBAR = 'Export fehlerhaft'
 }
 
 export enum MeldungArtZusyTyp {

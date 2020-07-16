@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import {BewegungArtTyp, BewegungStatusTyp, BewegungVM, MeldungVM, VertragVM} from "app/entities/model";
+import {
+  BewegungArtTyp,
+  BewegungStatusTyp,
+  BewegungVM,
+  MeldungArtTyp,
+  MeldungStatusTyp,
+  MeldungVM,
+  VertragVM
+} from "app/entities/model";
 
 @Injectable({
   providedIn: 'root'
@@ -85,14 +93,60 @@ export class VertragTestService {
    */
   private getMeldungen(): MeldungVM[] {
     const meldungen: MeldungVM[] = [];
+    for( let c=2011; c<2020; c++ ) {
+
+      meldungen.push(
+        this.getMeldung(new Date(c + '-03-10'), new Date(c + '-03-10'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, '')
+      );
+      if ( c !== 2012 ) {
+        meldungen.push(
+          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, '')
+        );
+      } else {
+        meldungen.push(
+          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.AZ01, MeldungStatusTyp.EINGANG_IMPORTIERT_MIT_FEHLER, c - 1, '')
+        );
+        meldungen.push(
+          this.getMeldung(new Date(c + '-03-20'), new Date(c + '-03-20'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, '')
+        );
+        meldungen.push(
+          this.getMeldung(new Date(c + '-03-21'), new Date(c + '-03-21'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, '')
+        );
+      }
+
+    }
+    meldungen.push(
+      this.getMeldung(
+        new Date( '2020-03-10'),
+        null,
+        MeldungArtTyp.AZ01,
+        MeldungStatusTyp.AUSGANG_ANGELEGT,
+        2019,
+        ''
+      )
+    );
     return meldungen;
   }
 
   /**
    *
    */
-  private getMeldung(): MeldungVM {
-    const meldung = new MeldungVM();
+  private getMeldung(
+    datumangelegt: Date,
+    datumverarbeitet: any,
+    art: MeldungArtTyp,
+    stat: MeldungStatusTyp,
+    jahr: number,
+    text: string
+  ): MeldungVM {
+    const meldung = new MeldungVM(
+      datumangelegt,
+      datumverarbeitet,
+      art,
+      stat,
+      jahr,
+      text
+    );
     return meldung;
   }
 }

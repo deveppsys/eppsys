@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
-import { MeldungArtTyp, MeldungStatusTyp, MeldungVM } from "app/entities/model";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MeldungStatusTyp, MeldungVM } from "app/entities/model";
+import {VertragService} from "app/vertrag/vertrag.service";
+import Table = WebAssembly.Table;
 
 @Component({
   selector: 'epp-vertrag-meldung-uebersicht',
@@ -11,54 +12,109 @@ export class VertragMeldungUebersichtComponent implements OnInit {
 
   meldungen: MeldungVM[] = [];
 
-  sortOptions: SelectItem[];
+  meldungSelected: MeldungVM | undefined;
 
-  sortKey = '';
+  loading = true;
 
-  sortField = '';
+  statuses: any[];
 
-  sortOrder = -1;
+  @ViewChild('dt') table: Table;
 
-  constructor() {
-    this.sortOptions = [
-      {label: 'Art', value: 'art'},
-      {label: 'Status', value: 'status'}
-    ];
+  constructor(private vertragService: VertragService) {
 
-    this.meldungen = [
-      {
-        datumangelegt: new Date( '2020-01-01'),
-        datumverarbeitet: new Date( '2020-01-01'),
-        art: MeldungArtTyp.AZ01,
-        stat: MeldungStatusTyp.AUSGANG_EXPORTIERT
-      },
-      {
-        datumangelegt: new Date( '2020-01-05'),
-        datumverarbeitet: new Date( '2020-01-01'),
-        art: MeldungArtTyp.ZA02,
-        stat: MeldungStatusTyp.EINGANG_IMPORTIERT
-      },
-      {
-        datumangelegt: new Date( '2020-5-15'),
-        art: MeldungArtTyp.ZA04,
-        stat: MeldungStatusTyp.EINGANG_ANGELEGT
-      }
+    this.statuses = [
+      {label: 'Import angelegt', value: 'Import angelegt'},
+      {label: 'Import ohne Fehler', value: 'Import ohne Fehler'},
+      {label: 'Import mit Fehlern', value: 'Import mit Fehlern'},
+      {label: 'Import fehlerhaft', value: 'mport fehlerhaft'},
+      {label: 'Export angelegt', value: 'Export angelegt'},
+      {label: 'Export ohne Fehler', value: 'Export ohne Fehler'},
+      {label: 'Export fehlerhaft', value: 'Export fehlerhaft'}
     ]
   }
 
   ngOnInit(): void {
+    if ( this.vertragService.vertragActive &&
+      this.vertragService.vertragActive.meldungen ) {
+      this.meldungen = this.vertragService.vertragActive.meldungen;
+      this.loading = false;
+    }
   }
 
-  onSortChange(event: any): void {
-    const value = event.value;
+  onDateSelect(value: Date): void {
+    this.table.filter(this.formatDate(value), 'date', 'equals')
+  }
 
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
+
+  formatDate(date: Date): string {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    if (month < 10) {
+      month = Number('0' + month);
     }
-    else {
-      this.sortOrder = 1;
-      this.sortField = value;
+
+    if (day < 10) {
+      day = Number('0' + day);
     }
+
+    return date.getFullYear() + '-' + month + '-' + day;
+  }
+
+  getMeldungStatus(meldung: MeldungVM): string {
+    if ( meldung &&
+         meldung.stat ) {
+      return meldung.stat.toString();
+    }
+    return '';
+  }
+
+  isEingehendAngelegt(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.EINGANG_ANGELEGT ) {
+      return true;
+    }
+    return false;
+  }
+
+  isEingehendImportiertOhneFehler(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER ) {
+      return true;
+    }
+    return false;
+  }
+
+  isEingehendImportiertMitFehler(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.EINGANG_IMPORTIERT_MIT_FEHLER ) {
+      return true;
+    }
+    return false;
+  }
+
+  isEingehendImportiertNichtImportierbar(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.EINGANG_NICHT_IMPORTIERBAR ) {
+      return true;
+    }
+    return false;
+  }
+
+  isAusgehendAngelegt(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.AUSGANG_ANGELEGT ) {
+      return true;
+    }
+    return false;
+  }
+
+  isAusgehendExportiertOhneFehler(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER ) {
+      return true;
+    }
+    return false;
+  }
+
+  isAusgehendExportiertNichtExportierbar(meldung: MeldungVM): boolean {
+    if ( meldung.stat === MeldungStatusTyp.AUSGANG_EXPORTIERT_NICHT_EXPORTIERBAR ) {
+      return true;
+    }
+    return false;
   }
 }

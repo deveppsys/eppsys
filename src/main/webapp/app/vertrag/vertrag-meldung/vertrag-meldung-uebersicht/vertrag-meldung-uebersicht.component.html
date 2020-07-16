@@ -1,4 +1,116 @@
 <p-card header="Meldungen - zusy">
+    <p-table #dt [value]="meldungen"
+             [(selection)]="meldungSelected"
+             dataKey="id"
+             styleClass="ui-table-meldungen"
+             [rowHover]="true"
+             [rows]="10"
+             [showCurrentPageReport]="true"
+             [rowsPerPageOptions]="[10,25,50,100,500]"
+             [loading]="loading"
+             [paginator]="true"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0"
+             [globalFilterFields]="['art','jahr','status','status']">
+        <ng-template pTemplate="caption">
+            Meldungsliste
+            <div class="ui-table-globalfilter-container">
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Suche" />
+            </div>
+        </ng-template>
+        <br>
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th pSortableColumn="art">Art <p-sortIcon field="art"></p-sortIcon></th>
+                <th pSortableColumn="jahrZuordnung">Jahr <p-sortIcon field="jahrZuordnung"></p-sortIcon></th>
+                <th pSortableColumn="datumangelegt">Angelegt <p-sortIcon field="datumangelegt"></p-sortIcon></th>
+                <th pSortableColumn="stat">Status <p-sortIcon field="stat"></p-sortIcon></th>
+                <th pSortableColumn="datumverarbeitet">Verarbeitet <p-sortIcon field="datumverarbeitet"></p-sortIcon></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'art', 'startsWith')" placeholder="Suche Art" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'jahrZuordnung', 'contains')" placeholder="Suche Jahr" class="ui-column-filter">
+                </th>
+                <th>
+                    <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
+                </th>
+                <th>
+                <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'stat', 'equals')" styleClass="ui-column-filter" placeholder="Suche Status" [showClear]="true">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>
+                </th>
+                <th>
+                    <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-meldung>
+            <tr class="ui-selectable-row">
+                <td>
+                    <div *ngIf="isEingehendAngelegt(meldung)">
+                        <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: gray;"></i>
+                    </div>
+                    <div *ngIf="isEingehendImportiertOhneFehler(meldung)">
+                        <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: limegreen;"></i>
+                    </div>
+                    <div *ngIf="isEingehendImportiertMitFehler(meldung)">
+                        <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: orangered;"></i>
+                    </div>
+                    <div *ngIf="isAusgehendAngelegt(meldung)">
+                        <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: gray;"></i>
+                    </div>
+                    <div *ngIf="isAusgehendExportiertOhneFehler(meldung)">
+                        <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: limegreen;"></i>
+                    </div>
+                    <div *ngIf="isAusgehendExportiertNichtExportierbar(meldung)">
+                        <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: orangered;"></i>
+                    </div>
+                </td>
+                <td>
+                    <span class="ui-column-title">Art</span>
+                    {{meldung.art}}
+                </td>
+                <td>
+                    <span class="ui-column-title">Jahr</span>
+                    {{meldung.jahrZuordnung}}
+                </td>
+                <td>
+                    <span class="ui-column-title">Verarbeitet</span>
+                    {{meldung.datumangelegt | date:'dd.MM.yyyy' }}
+                </td>
+                <td>
+                    <span class="ui-column-title">Status</span>
+                    {{meldung.stat}}
+                </td>
+                <td>
+                    <span class="ui-column-title">Verarbeitet</span>
+                    {{meldung.datumverarbeitet | date:'dd.MM.yyyy' }}
+                </td>
+                <td>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: 0.7em"></button>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: 0.7em"></button>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: 0.7em"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8" style="text-align:left">Keine Meldungen gefunden.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>
+<!--
+<p-card header="Meldungen - zusy">
     <p-dataView [value]="meldungen"
                 [paginator]="true"
                 [rows]="15"
@@ -12,23 +124,47 @@
                 </div>
             </div>
             <div class="p-grid">
-                <div class="p-col-1 text-left">Art</div>
+                <div class="p-col-1 text-center">&nbsp;</div>
+                <div class="p-col-1 text-center">Art</div>
+                <div class="p-col-1 text-center">Jahr</div>
                 <div class="p-col-1 text-center">Angelegt</div>
                 <div class="p-col-2 text-left">Status</div>
                 <div class="p-col-1 text-center">Verarbeitet</div>
-                <div class="p-col-7"></div>
+                <div class="p-col-5"></div>
             </div>
         </p-header>
         <ng-template let-meldung pTemplate="listItem">
-            <div class="p-col-1 text-left">{{meldung.art}}</div>
+            <div class="p-col-1 text-center">
+                <div *ngIf="isEingehendAngelegt(meldung)">
+                    <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: gray;"></i>
+                </div>
+                <div *ngIf="isEingehendImportiertOhneFehler(meldung)">
+                    <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: limegreen;"></i>
+                </div>
+                <div *ngIf="isEingehendImportiertMitFehler(meldung)">
+                    <i class="pi pi-arrow-right" style="font-size: 1em; font-weight: bold; color: orangered;"></i>
+                </div>
+                <div *ngIf="isAusgehendAngelegt(meldung)">
+                    <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: gray;"></i>
+                </div>
+                <div *ngIf="isAusgehendExportiertOhneFehler(meldung)">
+                    <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: limegreen;"></i>
+                </div>
+                <div *ngIf="isAusgehendExportiertNichtExportierbar(meldung)">
+                    <i class="pi pi-arrow-left" style="font-size: 1em; font-weight: bold; color: orangered;"></i>
+                </div>
+            </div>
+            <div class="p-col-1 text-center">{{meldung.art}}</div>
+            <div class="p-col-1 text-center">{{meldung.jahrZuordnung}}</div>
             <div class="p-col-1 text-center">{{meldung.datumangelegt | date:'dd.MM.yyyy'}}</div>
             <div class="p-col-2 text-left">{{meldung.stat}}</div>
             <div class="p-col-1 text-center">{{meldung.datumverarbeitet | date:'dd.MM.yyyy'}}</div>
-            <div class="p-col-7 text-left">
-                <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: .7em"></button>
-                <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: .7em"></button>
-                <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: .7em"></button>
+            <div class="p-col-5 text-left">
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: 0.7em"></button>
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: 0.7em"></button>
+                <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: 0.7em"></button>
             </div>
         </ng-template>
     </p-dataView>
 </p-card>
+-->
