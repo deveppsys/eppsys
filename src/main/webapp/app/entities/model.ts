@@ -36,6 +36,7 @@ export class MeldungVM {
     public art?: MeldungArtTyp,
     public stat?: MeldungStatusTyp,
     public jahrZuordnung?: number,
+    public verfahren?: MeldungVerfahrenTyp,
     public meldung?: string
   ) {
 
@@ -63,6 +64,22 @@ export enum MeldungArtZusyTyp {
   ZA03 = 'ZA03',
   ZA04 = 'ZA04'
 }
+export enum MeldungArtRebsyTyp {
+  MZ01 = 'MZ01'
+}
+
+export enum MeldungArtMavTyp {
+  MI01 = 'MI01',
+
+  IM01 = 'IM01'
+}
+
+
+export enum MeldungVerfahrenTyp {
+  ZUSY = 'zusy',
+  REBSY = 'rebsy',
+  MAV = 'mav'
+}
 
 export enum MeldungArtTyp  {
   AZ01 = MeldungArtZusyTyp.AZ01,
@@ -72,7 +89,12 @@ export enum MeldungArtTyp  {
   ZA01 = MeldungArtZusyTyp.ZA01,
   ZA02 = MeldungArtZusyTyp.ZA02,
   ZA03 = MeldungArtZusyTyp.ZA03,
-  ZA04 = MeldungArtZusyTyp.ZA04
+  ZA04 = MeldungArtZusyTyp.ZA04,
+
+  MZ01 = MeldungArtRebsyTyp.MZ01,
+
+  MI01 = MeldungArtMavTyp.MI01,
+  IM01 = MeldungArtMavTyp.IM01
 }
 
 export class BerechnungJahrVM {

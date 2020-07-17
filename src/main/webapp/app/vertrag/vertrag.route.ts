@@ -70,7 +70,7 @@ export const VERTRAG_ROUTES: Routes = [
         component: VertragFoerderungUebersichtComponent,
       },
       {
-        path: 'meldung-zusy',
+        path: 'meldungen/:verfahren',
         component: VertragMeldungUebersichtComponent,
       },
       {

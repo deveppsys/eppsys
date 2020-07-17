@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   BewegungArtTyp,
   BewegungStatusTyp,
   BewegungVM,
   MeldungArtTyp,
   MeldungStatusTyp,
+  MeldungVerfahrenTyp,
   MeldungVM,
   VertragVM
 } from "app/entities/model";
@@ -93,24 +94,32 @@ export class VertragTestService {
    */
   private getMeldungen(): MeldungVM[] {
     const meldungen: MeldungVM[] = [];
+    meldungen.push(...this.getMeldungenZusy());
+    meldungen.push(...this.getMeldungenRebsy());
+    meldungen.push(...this.getMeldungenMav());
+    return meldungen;
+  }
+
+  private getMeldungenZusy(): MeldungVM[] {
+    const meldungen: MeldungVM[] = [];
     for( let c=2011; c<2020; c++ ) {
 
       meldungen.push(
-        this.getMeldung(new Date(c + '-03-10'), new Date(c + '-03-10'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, '')
+        this.getMeldung(new Date(c + '-03-10'), new Date(c + '-03-10'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, MeldungVerfahrenTyp.ZUSY, '')
       );
       if ( c !== 2012 ) {
         meldungen.push(
-          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, '')
+          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, MeldungVerfahrenTyp.ZUSY, '')
         );
       } else {
         meldungen.push(
-          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.AZ01, MeldungStatusTyp.EINGANG_IMPORTIERT_MIT_FEHLER, c - 1, '')
+          this.getMeldung(new Date(c + '-03-11'), new Date(c + '-03-11'), MeldungArtTyp.AZ01, MeldungStatusTyp.EINGANG_IMPORTIERT_MIT_FEHLER, c - 1, MeldungVerfahrenTyp.ZUSY, '')
         );
         meldungen.push(
-          this.getMeldung(new Date(c + '-03-20'), new Date(c + '-03-20'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, '')
+          this.getMeldung(new Date(c + '-03-20'), new Date(c + '-03-20'), MeldungArtTyp.AZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, MeldungVerfahrenTyp.ZUSY, '')
         );
         meldungen.push(
-          this.getMeldung(new Date(c + '-03-21'), new Date(c + '-03-21'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, '')
+          this.getMeldung(new Date(c + '-03-21'), new Date(c + '-03-21'), MeldungArtTyp.ZA02, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, c - 1, MeldungVerfahrenTyp.ZUSY, '')
         );
       }
 
@@ -122,8 +131,30 @@ export class VertragTestService {
         MeldungArtTyp.AZ01,
         MeldungStatusTyp.AUSGANG_ANGELEGT,
         2019,
+        MeldungVerfahrenTyp.ZUSY,
         ''
       )
+    );
+    return meldungen;
+  }
+
+  private getMeldungenRebsy(): MeldungVM[] {
+    const meldungen: MeldungVM[] = [];
+    for ( let c=2010;c<2020;c++) {
+      meldungen.push(
+        this.getMeldung(new Date(c + '-03-21'), new Date(c + '-03-21'), MeldungArtTyp.MZ01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, c - 1, MeldungVerfahrenTyp.REBSY, '')
+      );
+    }
+    return meldungen;
+  }
+
+  private getMeldungenMav(): MeldungVM[] {
+    const meldungen: MeldungVM[] = [];
+    meldungen.push(
+      this.getMeldung(new Date('2017-05-01'), new Date('2017-05-01'), MeldungArtTyp.MI01, MeldungStatusTyp.AUSGANG_EXPORTIERT_OHNE_FEHLER, 2017, MeldungVerfahrenTyp.MAV, '')
+    );
+    meldungen.push(
+      this.getMeldung(new Date( '2017-05-02'), new Date('2017-05-02'), MeldungArtTyp.IM01, MeldungStatusTyp.EINGANG_IMPORTIERT_OHNE_FEHLER, 2017, MeldungVerfahrenTyp.MAV, '')
     );
     return meldungen;
   }
@@ -137,6 +168,7 @@ export class VertragTestService {
     art: MeldungArtTyp,
     stat: MeldungStatusTyp,
     jahr: number,
+    verfahren: MeldungVerfahrenTyp,
     text: string
   ): MeldungVM {
     const meldung = new MeldungVM(
@@ -145,6 +177,7 @@ export class VertragTestService {
       art,
       stat,
       jahr,
+      verfahren,
       text
     );
     return meldung;

@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MeldungStatusTyp, MeldungVM } from "app/entities/model";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MeldungStatusTyp, MeldungVerfahrenTyp, MeldungVM} from "app/entities/model";
 import {VertragService} from "app/vertrag/vertrag.service";
-import { Table } from 'primeng/table';
+import {Table} from 'primeng/table';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'epp-vertrag-meldung-uebersicht',
@@ -18,13 +19,17 @@ export class VertragMeldungUebersichtComponent implements OnInit {
 
   statuses: any[];
 
+  headline = '';
+
   @ViewChild('dt') table: Table | undefined;
 
   showAnzeigen = false;
   showAendern = false;
   showLoeschen = false;
 
-  constructor(private vertragService: VertragService) {
+
+
+  constructor(private vertragService: VertragService, private route: ActivatedRoute) {
 
     this.statuses = [
       {label: 'Import angelegt', value: 'Import angelegt'},
@@ -35,14 +40,35 @@ export class VertragMeldungUebersichtComponent implements OnInit {
       {label: 'Export ohne Fehler', value: 'Export ohne Fehler'},
       {label: 'Export fehlerhaft', value: 'Export fehlerhaft'}
     ]
+
+
   }
 
   ngOnInit(): void {
-    if ( this.vertragService.vertragActive &&
-      this.vertragService.vertragActive.meldungen ) {
-      this.meldungen = this.vertragService.vertragActive.meldungen;
-      this.loading = false;
-    }
+    this.route.params.subscribe(params => {
+      if ( params['verfahren'] === 'zusy' ) {
+        if ( this.vertragService.vertragActive &&
+          this.vertragService.vertragActive.meldungen ) {
+          this.meldungen = this.vertragService.vertragActive.meldungen.filter( x => x.verfahren === MeldungVerfahrenTyp.ZUSY );
+          this.headline = 'ZUSY';
+          this.loading = false;
+        }
+      } else if ( params['verfahren'] === 'rebsy' ) {
+        if ( this.vertragService.vertragActive &&
+          this.vertragService.vertragActive.meldungen ) {
+          this.meldungen = this.vertragService.vertragActive.meldungen.filter( x => x.verfahren === MeldungVerfahrenTyp.REBSY );
+          this.headline = 'REBSY';
+          this.loading = false;
+        }
+      } else if ( params['verfahren'] === 'mav') {
+        if ( this.vertragService.vertragActive &&
+          this.vertragService.vertragActive.meldungen ) {
+          this.meldungen = this.vertragService.vertragActive.meldungen.filter( x => x.verfahren === MeldungVerfahrenTyp.MAV );
+          this.headline = 'MAV';
+          this.loading = false;
+        }
+      }
+    });
   }
 
   onSucheSelect(target: any): void {

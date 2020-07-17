@@ -104,10 +104,16 @@ export class VertragBasisComponent implements OnInit {
         items: [
           {
             label: 'zusy',
-            routerLink: 'meldung-zusy'
+            routerLink: 'meldungen/zusy',
           },
-          { label: 'rebsy' },
-          { label: 'mav' }
+          {
+            label: 'rebsy',
+            routerLink: 'meldungen/rebsy',
+          },
+          {
+            label: 'mav',
+            routerLink: 'meldungen/mav',
+          }
         ]
       },
       {
