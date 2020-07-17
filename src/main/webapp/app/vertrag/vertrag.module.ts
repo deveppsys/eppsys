@@ -15,7 +15,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { TabViewModule } from 'primeng/tabview';
 import { CalendarModule } from 'primeng/calendar';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 import { VertragSteuerToepfeComponent } from './vertrag-steuer/vertrag-steuer-toepfe/vertrag-steuer-toepfe.component';
 import { VertragZaBasisComponent } from './vertrag-zulageantrag/vertrag-za-basis/vertrag-za-basis.component';
 import { VertragZaPersonComponent } from './vertrag-zulageantrag/vertrag-za-person/vertrag-za-person.component';
@@ -47,8 +48,8 @@ import {VertragTestService} from "app/vertrag/vertrag-test.service";
     TableModule,
     TabViewModule,
     CalendarModule,
-    InputTextModule
-
+    InputTextModule,
+    DialogModule
   ],
   declarations: [VertragBasisComponent, VertragSucheComponent, VertragPersonComponent, VertragSteuerToepfeComponent, VertragZaBasisComponent, VertragZaPersonComponent, VertragZaKindComponent, VertragVermBewegungenComponent, VertragVermUebersichtComponent, VertragVermWertentwComponent, VertragMeldungUebersichtComponent, VertragMeldungDetailComponent, VertragFoerderungUebersichtComponent, VertragAllgemeinBerechnungComponent, VertragBerechnungYearComponent, VertragBerechnungPartComponent],
   providers: [VertragService, VertragTestService]

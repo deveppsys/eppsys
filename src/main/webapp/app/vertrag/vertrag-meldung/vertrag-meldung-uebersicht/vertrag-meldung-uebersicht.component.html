@@ -11,11 +11,11 @@
              [paginator]="true"
              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
              [filterDelay]="0"
-             [globalFilterFields]="['art','jahr','status','status']">
+             [globalFilterFields]="['art','jahrZuordnung','stat']">
         <ng-template pTemplate="caption">
             Meldungsliste
             <div class="ui-table-globalfilter-container">
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Suche" />
+                <input pInputText type="text" (input)="onSucheSelect($event.target)" placeholder="Suche" />
             </div>
         </ng-template>
         <br>
@@ -32,23 +32,23 @@
             <tr>
                 <th></th>
                 <th>
-                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'art', 'startsWith')" placeholder="Suche Art" class="ui-column-filter">
+                    <input pInputText type="text" (input)="onArtSelect($event.target)" placeholder="Suche Art" class="ui-column-filter">
                 </th>
                 <th>
-                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'jahrZuordnung', 'contains')" placeholder="Suche Jahr" class="ui-column-filter">
+                    <input InputText type="text" (input)="onJahrSelect($event.target)" placeholder="Suche Jahr" class="ui-column-filter">
                 </th>
                 <th>
-                    <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
+                    <p-calendar (onSelect)="onDateSelect($event.getDate())" (onClearClick)="onDateSelect(0 )" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
                 </th>
                 <th>
-                <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'stat', 'equals')" styleClass="ui-column-filter" placeholder="Suche Status" [showClear]="true">
+                <p-dropdown [options]="statuses" (onChange)="onStatusSelect($event.value)" styleClass="ui-column-filter" placeholder="Suche Status" [showClear]="true">
                     <ng-template let-option pTemplate="item">
                         <span>{{option.label}}</span>
                     </ng-template>
                 </p-dropdown>
                 </th>
                 <th>
-                    <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
+                    <p-calendar #i4 (onSelect)="onDateSelect($event.getDate())" (onClearClick)="onDateSelect(0 )" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Suche Datum" [readonlyInput]="true" dateFormat="yy-mm-dd"></p-calendar>
                 </th>
                 <th></th>
             </tr>
@@ -96,9 +96,9 @@
                     {{meldung.datumverarbeitet | date:'dd.MM.yyyy' }}
                 </td>
                 <td>
-                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: 0.7em"></button>
-                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: 0.7em"></button>
-                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: 0.7em"></button>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-search" style="font-size: 0.7em" (click)="onClickAnzeigen(meldung)"></button>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-pencil" style="font-size: 0.7em" (click)="onClickAendern(meldung)"></button>
+                    <button pButton type="button" class="ui-button-secondary" icon="pi pi-minus" style="font-size: 0.7em" (click)="onClickLoeschen(meldung)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -109,6 +109,20 @@
         </ng-template>
     </p-table>
 </p-card>
+
+
+<p-dialog header="Meldung {{meldungSelected?.art}} anzeigen" [modal]="true" [(visible)]="showAnzeigen">
+    Content
+</p-dialog>
+
+<p-dialog header="Meldung {{meldungSelected?.art}} ändern" [modal]="true" [(visible)]="showAendern">
+    Content
+</p-dialog>
+
+<p-dialog header="Meldung {{meldungSelected?.art}} löschen" [modal]="true" [(visible)]="showLoeschen">
+    Content
+</p-dialog>
+
 <!--
 <p-card header="Meldungen - zusy">
     <p-dataView [value]="meldungen"

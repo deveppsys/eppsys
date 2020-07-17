@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MeldungStatusTyp, MeldungVM } from "app/entities/model";
 import {VertragService} from "app/vertrag/vertrag.service";
-import Table = WebAssembly.Table;
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'epp-vertrag-meldung-uebersicht',
@@ -18,7 +18,11 @@ export class VertragMeldungUebersichtComponent implements OnInit {
 
   statuses: any[];
 
-  @ViewChild('dt') table: Table;
+  @ViewChild('dt') table: Table | undefined;
+
+  showAnzeigen = false;
+  showAendern = false;
+  showLoeschen = false;
 
   constructor(private vertragService: VertragService) {
 
@@ -41,8 +45,38 @@ export class VertragMeldungUebersichtComponent implements OnInit {
     }
   }
 
-  onDateSelect(value: Date): void {
-    this.table.filter(this.formatDate(value), 'date', 'equals')
+  onSucheSelect(target: any): void {
+    if ( this.table ) {
+      this.table.filterGlobal(target.value, 'contains');
+    }
+  }
+
+  onArtSelect(target: any): void {
+    if ( this.table ) {
+      this.table.filter(target.value, 'art', 'startsWith');
+    }
+  }
+
+  onJahrSelect(target: any): void {
+    if ( this.table ) {
+      this.table.filter(target.value, 'jahrZuordnung', 'contains');
+    }
+  }
+
+  onDateSelect(value: number): void {
+    if( this.table ) {
+      if ( value === 0 )  {
+        this.table.filter('', 'date', 'equals')
+      } else {
+        this.table.filter(this.formatDate(new Date(value)), 'date', 'equals')
+      }
+    }
+  }
+
+  onStatusSelect(value: any): void {
+    if( this.table ) {
+      this.table.filter(value, 'stat', 'equals')
+    }
   }
 
 
@@ -116,5 +150,20 @@ export class VertragMeldungUebersichtComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  onClickAnzeigen(meldung: MeldungVM): void {
+    this.meldungSelected = meldung;
+    this.showAnzeigen = true;
+  }
+
+  onClickAendern(meldung: MeldungVM): void {
+    this.meldungSelected = meldung;
+    this.showAendern = true;
+  }
+
+  onClickLoeschen(meldung: MeldungVM): void {
+    this.meldungSelected = meldung;
+    this.showLoeschen = true;
   }
 }
